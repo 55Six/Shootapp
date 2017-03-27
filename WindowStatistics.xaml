@@ -1,0 +1,116 @@
+﻿<Window x:Class="ShootingCompetition.WindowStatistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShootingCompetition"
+        mc:Ignorable="d"
+        Title="WindowStatistics" Height="400" Width="464">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Print" Click="MenuItem_Click_Print"/>
+        </Menu>
+        <TabControl x:Name="tbcRoot">
+            <TabItem Header="Individual print">
+                <ScrollViewer>
+                    <TextBox x:Name="tbIndStat" AcceptsReturn="True" IsReadOnly ="True"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Team print">
+                <ScrollViewer>
+                    <TextBox x:Name="tbTeamStat" AcceptsReturn="True" IsReadOnly ="True"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Individual score">
+                <ScrollViewer>
+                    <DataGrid x:Name="dataGridIndivi" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="surname" Binding="{Binding Surname}"/>
+                            <DataGridTextColumn Header="club" Binding="{Binding Club}"/>
+                            <DataGridTextColumn Header="team" Binding="{Binding Team}"/>
+                            <DataGridTextColumn Header="hits" Binding="{Binding RoundHits}"/>
+                            <DataGridTextColumn Header="total" Binding="{Binding Total}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Team score">
+                <ScrollViewer>
+                    <DataGrid x:Name="dataGridShooters" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="surname" Binding="{Binding Surname}"/>
+                            <DataGridTextColumn Header="club" Binding="{Binding Club}"/>
+                            <DataGridTextColumn Header="team" Binding="{Binding Team}"/>
+                            <DataGridTextColumn Header="hits" Binding="{Binding RoundHits}"/>
+                            <DataGridTextColumn Header="total" Binding="{Binding Total}"/>
+                        </DataGrid.Columns>
+                        <DataGrid.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Margin" Value="0,0,0,5"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                    <Expander IsExpanded="True" BorderBrush="Gainsboro" BorderThickness="1,1,1,5" Background="{x:Null}">
+                                                        <Expander.Header>
+                                                            <DockPanel>
+                                                                <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" Margin="5,0,0,0" Width="150"/>
+                                                                <TextBlock FontWeight="Bold" Text="{Binding Path=ItemCount}"/>
+                                                            </DockPanel>
+                                                        </Expander.Header>
+                                                        <Expander.Content>
+                                                            <ItemsPresenter />
+                                                        </Expander.Content>
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Details">
+                <StackPanel x:Name="stackRoot">
+                    <Label Content="COMPETITION DETAILS" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="ID:" />
+                        <Label x:Name="lblCid" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Title:" />
+                        <Label x:Name="lblTitle" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Range:" />
+                        <Label x:Name="lblRange" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Date:" />
+                        <Label x:Name="lblDate" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Target type:" />
+                        <Label x:Name="lblTarget" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Shots:" />
+                        <Label x:Name="lblShots" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Rounds:" />
+                        <Label x:Name="lblRounds" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

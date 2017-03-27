@@ -1,0 +1,101 @@
+﻿<Window x:Class="ShootingCompetition.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShootingCompetition"
+        mc:Ignorable="d"
+        Title="SHOOTING APP (data base manager)" Height="350" Width="525">
+
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Competition">
+                    <MenuItem Header="Precise" Click="MenuItemPrecise_Click"/>
+                </MenuItem>
+                <MenuItem Header="Exit" Click="MenuItemExit_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!--Dock panel tahat holds wrap panel, which holds buttons for DB manipulation-->
+        <DockPanel DockPanel.Dock="Bottom">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <Button x:Name="buttonInsert" Content="Insert" Margin="6,3,3,3" Width="75" Height="22" Click="Button_ClickInsert" />
+                <Button x:Name="buttonUpdate" Content="Update" Margin="3,3,3,3" Width="75" Height="22" Click="buttonUpdate_Click"/>
+                <Button x:Name="buttonDelete" Content="Delete" Margin="3,3,3,3" Width="75" Height="22" Click="buttonDelete_Click"/>
+            </StackPanel>
+        </DockPanel>
+
+        <!--Diffrent tabs for different data grids-->
+        <TabControl x:Name="tabControlRoot">
+            <TabItem x:Name="tabShooters" Header="Shooters">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Column="1">
+                        <DataGrid x:Name="dataGridShooters" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"/>
+                    </ScrollViewer>
+                    <StackPanel Background="#FFD4D4D4" Grid.Column="0">
+                        <StackPanel Orientation="Horizontal" Margin="1,2,1,1">
+                            <Label Content="Id:"/>
+                            <TextBox x:Name="textBoxId" Width="219" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Label Content="Name:"/>
+                            <TextBox x:Name="textBoxName" Width="198" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Label Content="Surname:"/>
+                            <TextBox x:Name="textBoxSurname" Width="183" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Label Content="Club:"/>
+                            <TextBox x:Name="textBoxClub" Width="205" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="1">
+                            <Label Content="Team:"/>
+                            <TextBox x:Name="textBoxTeam" Width="202" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Background="#FFD4D4D4">
+                            <Button x:Name="buttonSearch" Content="Search" Width="75" Height="22" Margin="3,3,3,3" Click="buttonSearch_Click" />
+                            <Button x:Name="buttonReset" Content="Reset" Width="75" Height="22" Margin="3,3,3,3" Click="buttonReset_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tabCompetitions" Header="PCompetitions">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <DataGrid x:Name="dataGridPCompetitions" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="id" Binding="{Binding id}"/>
+                            <DataGridTextColumn Header="title" Binding="{Binding title}"/>
+                            <DataGridTextColumn Header="rangeid" Binding="{Binding rangeid}"/>
+                            <DataGridTextColumn Header="date" Binding="{Binding date, StringFormat={}{0:yyyy-MM-dd}}"/>
+                            <DataGridTextColumn Header="tartype" Binding="{Binding tartype}"/>                            
+                            <DataGridTextColumn Header="shots" Binding="{Binding shots}"/>
+                            <DataGridTextColumn Header="rounds" Binding="{Binding rounds}"/>
+                            <DataGridTextColumn Header="finished" Binding="{Binding finished}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="tabRanges" Header="Ranges">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <DataGrid x:Name="dataGridRanges" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="tabClubs" Header="Clubs">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <DataGrid x:Name="dataGridClubs" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="tabPlaces" Header="Places">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <DataGrid x:Name="dataGridPlaces" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"/>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
